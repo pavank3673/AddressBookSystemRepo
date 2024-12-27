@@ -45,9 +45,19 @@ class AddressBook:
             self.contact_person.phone_number = input("Enter phone number : ")
             self.contact_person.email = input("Enter email : ")
 
+    def delete_contact(self):
+        first_name = input("Enter contact person name to delete : ")
+        if self.contact_person.first_name != first_name:
+            print(f"Contact person {first_name} does not exists in address book")
+        else:
+            del self.contact_person
+
 address_book_one = AddressBook()
 address_book_one.add_contact()
 print(f"{address_book_one.contact_person} added to address book successfully")
 
 address_book_one.edit_contact()
 print(f"{address_book_one.contact_person} edited in address book successfully")
+
+address_book_one.delete_contact()
+print("Contact deleted from address book successfully")
