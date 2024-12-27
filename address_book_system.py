@@ -15,20 +15,23 @@ class ContactPerson:
         return f"Contact of {self.first_name} {self.last_name} with phone number : {self.phone_number}"
     
 class AddressBook:
-    def __init__(self, contact_person):
-        self.contact_person = contact_person
+    def __init__(self):
+        self.contact_person = None
 
-print("--- Enter contact details ---")
-first_name = input("Enter first name : ")
-last_name = input("Enter last name : ")
-address = input("Enter address : ")
-city = input("Enter city : ")
-state = input("Enter state : ")
-zip = input("Enter zip : ")
-phone_number = input("Enter phone number : ")
-email = input("Enter email : ")
+    def add_contact(self):
+        print("--- Enter contact details ---")
+        first_name = input("Enter first name : ")
+        last_name = input("Enter last name : ")
+        address = input("Enter address : ")
+        city = input("Enter city : ")
+        state = input("Enter state : ")
+        zip = input("Enter zip : ")
+        phone_number = input("Enter phone number : ")
+        email = input("Enter email : ")
 
-contact_one = ContactPerson(first_name, last_name, address, city, state, zip, phone_number, email)
-address_book_one = AddressBook(contact_one)
+        new_contact = ContactPerson(first_name, last_name, address, city, state, zip, phone_number, email)
+        self.contact_person = new_contact
 
+address_book_one = AddressBook()
+address_book_one.add_contact()
 print(f"{address_book_one.contact_person} added to address book successfully")
