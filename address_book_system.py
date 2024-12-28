@@ -130,15 +130,44 @@ class AddressBook:
                 for contact in contacts:
                     print(contact)
 
-        
-AddressBook.add_address_book()
-address_book_name = input("Enter existing address book name : ")
-AddressBook.address_books[address_book_name].add_contact()
-AddressBook.address_books[address_book_name].add_contact()
+    @classmethod
+    def count_contact(cls):
+        count_criteria = input("Enter count contact criteria, city or state : ")
+        if count_criteria == "city":
+            city_count = dict()
+            for address_book in cls.address_books:
+                for contact_person in cls.address_books[address_book].contact_persons:
+                    if contact_person.city in city_count:
+                        city_count[contact_person.city] += 1
+                    else:
+                        city_count[contact_person.city] = 0
+                        city_count[contact_person.city] += 1
+                    
+            for city, count in city_count.items():
+                print(f"City : {city}, Count : {count}")
+
+        elif count_criteria == "state":
+            state_count = dict()
+            for address_book in cls.address_books:
+                for contact_person in cls.address_books[address_book].contact_persons:
+                    if contact_person.state in state_count:
+                        state_count[contact_person.state] += 1
+                    else:
+                        state_count[contact_person.state] = 0
+                        state_count[contact_person.state] += 1
+
+            for state, count in state_count.items():
+                print(f"State : {state}, Count : {count}")
+                  
 
 AddressBook.add_address_book()
 address_book_name = input("Enter existing address book name : ")
 AddressBook.address_books[address_book_name].add_contact()
 AddressBook.address_books[address_book_name].add_contact()
 
-AddressBook.view_contact()
+AddressBook.add_address_book()
+address_book_name = input("Enter existing address book name : ")
+AddressBook.address_books[address_book_name].add_contact()
+AddressBook.address_books[address_book_name].add_contact()
+
+AddressBook.count_contact()
