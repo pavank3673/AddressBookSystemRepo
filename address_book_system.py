@@ -15,6 +15,8 @@ class ContactPerson:
         return f"Contact of {self.first_name} {self.last_name} with phone number : {self.phone_number}"
     
 class AddressBook:
+    address_books = dict()
+
     def __init__(self):
         self.contact_persons = []
 
@@ -51,10 +53,15 @@ class AddressBook:
             print(f"Contact person {first_name} does not exists in address book")
         else:
             del self.contact_person
-
-address_book_one = AddressBook()
-address_book_one.add_contact()
-address_book_one.add_contact()
-
-for ele in address_book_one.contact_persons:
-    print(ele)
+    
+    @classmethod
+    def add_address_book(cls):
+        address_book_name = input("Enter address book name : ")
+        if address_book_name in cls.address_books:
+            print(f"Address book with name {address_book_name} already exists")
+        else:
+            cls.address_books[address_book_name] = AddressBook()
+        
+        
+AddressBook.add_address_book()
+AddressBook.add_address_book()
