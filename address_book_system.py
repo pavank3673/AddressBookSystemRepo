@@ -16,7 +16,7 @@ class ContactPerson:
     
 class AddressBook:
     def __init__(self):
-        self.contact_person = None
+        self.contact_persons = []
 
     def add_contact(self):
         print("--- Enter contact details ---")
@@ -30,7 +30,7 @@ class AddressBook:
         email = input("Enter email : ")
 
         new_contact = ContactPerson(first_name, last_name, address, city, state, zip, phone_number, email)
-        self.contact_person = new_contact
+        self.contact_persons.append(new_contact)
 
     def edit_contact(self):
         first_name = input("Enter contact person name to edit : ")
@@ -54,10 +54,7 @@ class AddressBook:
 
 address_book_one = AddressBook()
 address_book_one.add_contact()
-print(f"{address_book_one.contact_person} added to address book successfully")
+address_book_one.add_contact()
 
-address_book_one.edit_contact()
-print(f"{address_book_one.contact_person} edited in address book successfully")
-
-address_book_one.delete_contact()
-print("Contact deleted from address book successfully")
+for ele in address_book_one.contact_persons:
+    print(ele)
