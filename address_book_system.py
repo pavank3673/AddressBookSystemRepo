@@ -77,9 +77,32 @@ class AddressBook:
             print(f"Address book with name {address_book_name} already exists")
         else:
             cls.address_books[address_book_name] = AddressBook()
-        
+
+    @classmethod
+    def search_contact(cls):
+        search_criteria = input("Enter search contact criteria, city or state : ")
+        if search_criteria == "city":
+            city_name = input("Enter city name : ")
+            for address_book in cls.address_books:
+                for contact_person in cls.address_books[address_book].contact_persons:
+                    if contact_person.city == city_name:
+                        print(contact_person)
+        elif search_criteria == "state":
+            state_name = input("Enter state name : ")
+            for address_book in cls.address_books:
+                for contact_person in cls.address_books[address_book].contact_persons:
+                    if contact_person.state == state_name:
+                        print(contact_person)
+
         
 AddressBook.add_address_book()
 address_book_name = input("Enter existing address book name : ")
 AddressBook.address_books[address_book_name].add_contact()
 AddressBook.address_books[address_book_name].add_contact()
+
+AddressBook.add_address_book()
+address_book_name = input("Enter existing address book name : ")
+AddressBook.address_books[address_book_name].add_contact()
+AddressBook.address_books[address_book_name].add_contact()
+
+AddressBook.search_contact()
