@@ -14,6 +14,12 @@ class ContactPerson:
     def __str__(self):
         return f"Contact of {self.first_name} {self.last_name} with phone number : {self.phone_number}"
     
+    def __eq__(self, value):
+        if isinstance(value, self.__class__):
+            return self.first_name == value.first_name
+        else:
+            return False
+
 class AddressBook:
     address_books = dict()
 
@@ -32,7 +38,17 @@ class AddressBook:
         email = input("Enter email : ")
 
         new_contact = ContactPerson(first_name, last_name, address, city, state, zip, phone_number, email)
-        self.contact_persons.append(new_contact)
+        
+        flag = False
+        for ele in self.contact_persons:
+            if ele == new_contact:
+                flag = True
+                break
+
+        if flag == True:
+            print(f"Contact person {new_contact.first_name} alredy exists")
+        else:
+            self.contact_persons.append(new_contact)
 
     def edit_contact(self):
         first_name = input("Enter contact person name to edit : ")
@@ -56,7 +72,7 @@ class AddressBook:
     
     @classmethod
     def add_address_book(cls):
-        address_book_name = input("Enter address book name : ")
+        address_book_name = input("Enter new address book name : ")
         if address_book_name in cls.address_books:
             print(f"Address book with name {address_book_name} already exists")
         else:
@@ -64,4 +80,6 @@ class AddressBook:
         
         
 AddressBook.add_address_book()
-AddressBook.add_address_book()
+address_book_name = input("Enter existing address book name : ")
+AddressBook.address_books[address_book_name].add_contact()
+AddressBook.address_books[address_book_name].add_contact()
