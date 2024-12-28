@@ -22,6 +22,8 @@ class ContactPerson:
 
 class AddressBook:
     address_books = dict()
+    city_dictionary = dict()
+    state_dictionary = dict()
 
     def __init__(self):
         self.contact_persons = []
@@ -94,6 +96,40 @@ class AddressBook:
                     if contact_person.state == state_name:
                         print(contact_person)
 
+    @classmethod
+    def view_contact(cls):
+        cls.city_dictionary.clear()
+        cls.state_dictionary.clear()
+
+        view_criteria = input("Enter view criteria, city or state : ")
+        if view_criteria == "city":
+            for address_book in cls.address_books:
+                for contact_person in cls.address_books[address_book].contact_persons:
+                    if contact_person.city in cls.city_dictionary:
+                        cls.city_dictionary[contact_person.city].append(contact_person)
+                    else:
+                        cls.city_dictionary[contact_person.city] = []
+                        cls.city_dictionary[contact_person.city].append(contact_person)
+            
+            for city ,contacts in cls.city_dictionary.items():
+                print(f"City: {city}")
+                for contact in contacts:
+                    print(contact)
+
+        elif view_criteria == "state":
+            for address_book in cls.address_books:
+                for contact_person in cls.address_books[address_book].contact_persons:
+                    if contact_person.state in cls.state_dictionary:
+                        cls.state_dictionary[contact_person.state].append(contact_person)
+                    else:
+                        cls.state_dictionary[contact_person.state] = []
+                        cls.state_dictionary[contact_person.state].append(contact_person)
+
+            for state, contacts in cls.state_dictionary.items():
+                print(f"State : {state}")
+                for contact in contacts:
+                    print(contact)
+
         
 AddressBook.add_address_book()
 address_book_name = input("Enter existing address book name : ")
@@ -105,4 +141,4 @@ address_book_name = input("Enter existing address book name : ")
 AddressBook.address_books[address_book_name].add_contact()
 AddressBook.address_books[address_book_name].add_contact()
 
-AddressBook.search_contact()
+AddressBook.view_contact()
