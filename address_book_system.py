@@ -180,6 +180,52 @@ class AddressBook:
                 for contact_person in cls.address_books[address_book].contact_persons:
                     print(contact_person)
 
+    @staticmethod
+    def sort_city_func(value):
+        return value.city
+
+    @staticmethod
+    def sort_state_func(value):
+        return value.state
+
+    @staticmethod
+    def sort_zip_func(value):
+        return value.zip
+
+    @classmethod
+    def sort_entries(cls):
+        sort_criteria = int(input("Choose sort criteria \n1. City \n2. State \n3. Zip \n"))
+        sort_order = int(input("Choose sort order \n1. Ascending \n2. Descending \n"))
+        if sort_criteria == 1:
+            for address_book in cls.address_books:
+                if sort_order == 1:
+                    cls.address_books[address_book].contact_persons.sort(key= AddressBook.sort_city_func)
+                elif sort_order == 2:
+                     cls.address_books[address_book].contact_persons.sort(key= AddressBook.sort_city_func, reverse = True)
+                print(f"Address book : {address_book}")
+                for contact_person in cls.address_books[address_book].contact_persons:
+                    print(contact_person)
+            
+        elif sort_criteria == 2:
+            for address_book in cls.address_books:
+                if sort_order == 1:
+                    cls.address_books[address_book].contact_persons.sort(key= AddressBook.sort_state_func)
+                elif sort_order == 2:
+                     cls.address_books[address_book].contact_persons.sort(key= AddressBook.sort_state_func, reverse = True)
+                print(f"Address book : {address_book}")
+                for contact_person in cls.address_books[address_book].contact_persons:
+                    print(contact_person)
+
+        elif sort_criteria == 3:
+            for address_book in cls.address_books:
+                if sort_order == 1:
+                    cls.address_books[address_book].contact_persons.sort(key= AddressBook.sort_zip_func)
+                elif sort_order == 2:
+                     cls.address_books[address_book].contact_persons.sort(key= AddressBook.sort_zip_func, reverse = True)
+                print(f"Address book : {address_book}")
+                for contact_person in cls.address_books[address_book].contact_persons:
+                    print(contact_person)
+
 
 AddressBook.add_address_book()
 address_book_name = input("Enter existing address book name : ")
@@ -191,4 +237,4 @@ address_book_name = input("Enter existing address book name : ")
 AddressBook.address_books[address_book_name].add_contact()
 AddressBook.address_books[address_book_name].add_contact()
 
-AddressBook.sort_contact()
+AddressBook.sort_entries()
