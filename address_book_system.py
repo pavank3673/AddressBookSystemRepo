@@ -158,7 +158,28 @@ class AddressBook:
 
             for state, count in state_count.items():
                 print(f"State : {state}, Count : {count}")
-                  
+
+    @staticmethod
+    def sort_func(value):
+        return value.first_name  
+
+    @classmethod
+    def sort_contact(cls):
+        sort_criteria = int(input("Choose sort criteria \n1. Ascending \n2. Descending \n"))
+        if sort_criteria == 1:
+            for address_book in cls.address_books:
+                print(f"Address book : {address_book}")
+                cls.address_books[address_book].contact_persons.sort(key= AddressBook.sort_func)
+                for contact_person in cls.address_books[address_book].contact_persons:
+                    print(contact_person)
+                
+        elif sort_criteria == 2:
+            for address_book in cls.address_books:
+                print(f"Address book : {address_book}")
+                cls.address_books[address_book].contact_persons.sort(key= AddressBook.sort_func, reverse = True)
+                for contact_person in cls.address_books[address_book].contact_persons:
+                    print(contact_person)
+
 
 AddressBook.add_address_book()
 address_book_name = input("Enter existing address book name : ")
@@ -170,4 +191,4 @@ address_book_name = input("Enter existing address book name : ")
 AddressBook.address_books[address_book_name].add_contact()
 AddressBook.address_books[address_book_name].add_contact()
 
-AddressBook.count_contact()
+AddressBook.sort_contact()
